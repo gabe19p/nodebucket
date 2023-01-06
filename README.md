@@ -1,5 +1,5 @@
 <h1>Contributors</h1>
-<hr>
+<br>
 <ul>
   <li>Professor Krasso</li>
   <li>Danial Purselley</li>
