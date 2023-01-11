@@ -15,17 +15,19 @@ const Employee = require("../models/employee");
 /**
  * findEmployeeById
  * @openapi
+ * /api/employees:
  *   get:
- *     tags: employee
- *     description:
- *     summary:
+ *     tags:
+ *       - Employees
+ *     description: API for finding an employee doc
+ *     summary: returns JSON of employee
  *     responses:
  *       '200':
- *         description:
+ *         description: Found employee
  *       '500':
- *         description:
+ *         description: Server Exception
  *       '501':
- *         description:
+ *         description: MongoDB Exception
  */
 router.get("/:empId", async (req, res) => {
   try {
