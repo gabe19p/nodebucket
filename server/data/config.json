@@ -1,0 +1,5 @@
+{
+  "dbConn": "mongodb+srv://nodebucket_user:s3cret@buwebdev-cluster-1.078ar.mongodb.net/nodebucket?retryWrites=true&w=majority",
+  "serverError": "Internal Server Error",
+  "mongoServerError": "MongoDB Server Error"
+}

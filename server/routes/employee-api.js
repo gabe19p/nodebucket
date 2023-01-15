@@ -9,25 +9,35 @@
 
 const express = require("express");
 const router = express.Router();
+const config = require("../data/config.json");
 // import our employee model
 const Employee = require("../models/employee");
 
 /**
  * findEmployeeById
  * @openapi
- * /api/employees:
+ * /api/employees/{empId}:
  *   get:
  *     tags:
  *       - Employees
- *     description: API for finding an employee doc
- *     summary: returns JSON of employee
+ *     description:  API for returning employees by employeeId
+ *     summary: returns employee by employeeId
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         description: Employees ID
+ *         schema:
+ *           type: Number
  *     responses:
  *       '200':
- *         description: Found employee
+ *         description: Employee document
+ *       '401':
+ *         description: Invalid employeeId
  *       '500':
- *         description: Server Exception
+ *         description: Server exception
  *       '501':
- *         description: MongoDB Exception
+ *         description: MongoDB exception
  */
 router.get("/:empId", async (req, res) => {
   try {
@@ -37,7 +47,7 @@ router.get("/:empId", async (req, res) => {
       if (err) {
         console.log(err);
         res.status(501).send({
-          err: "MongoDB server error: " + err.message,
+          err: config.mongoServerError + ": " + err.message,
         });
       }
       // if no error, return found emp as json

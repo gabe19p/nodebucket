@@ -1,5 +1,4 @@
 <div fxLayout="column">
-
   <!-- navigation -->
   <nav fxFlex>
     <mat-toolbar>
@@ -12,6 +11,11 @@
         <button class="navbar-link" mat-button>About</button>
       </div>
 
+      <div fxFlex>
+        <button (click)="logout()" mat-button class="nav-bar-link">
+          Log out
+        </button>
+      </div>
     </mat-toolbar>
   </nav>
 
@@ -27,7 +31,10 @@
     <footer class="footer">
       <mat-toolbar class="footer-content">
         <p>
-          &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
+          &copy; {{ year | date : "yyyy" }} - nodebucket -
+          <a href="https://www.bellevue.edu/" class="bu-link" target="_blank"
+            >Bellevue University</a
+          >
         </p>
       </mat-toolbar>
     </footer>
