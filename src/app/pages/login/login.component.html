@@ -1,5 +1,5 @@
 <div fxLayout="'column">
-  <mat-card>
+  <mat-card class="login-container">
     <mat-card-header>
       <mat-card-title> Employee Sign-In Page </mat-card-title>
       <mat-card-subtitle>
@@ -46,7 +46,9 @@
               color="primary"
               style="height: 50px; font-size: 18px"
               [disabled]="!loginForm.valid"
-            ></button>
+            >
+              Log In
+            </button>
           </mat-card-actions>
         </form>
       </mat-card>
