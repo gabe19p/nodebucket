@@ -1,11 +1,9 @@
 <div fxLayout="'column">
   <mat-card class="login-container">
-    <mat-card-header>
-      <mat-card-title> Employee Sign-In Page </mat-card-title>
-      <mat-card-subtitle>
-        You must enter a valid employee ID to continue
-      </mat-card-subtitle>
-    </mat-card-header>
+    <mat-card-title class="center"> Employee Sign-In Page </mat-card-title>
+    <mat-card-subtitle class="center">
+      You must enter a valid employee ID to continue
+    </mat-card-subtitle>
 
     <mat-card-content>
       <p-messages [(value)]="errorMessages" [enableService]="false">
@@ -43,7 +41,7 @@
               type="submit"
               fxFlex
               mat-raised-button
-              color="primary"
+              color="accent"
               style="height: 50px; font-size: 18px"
               [disabled]="!loginForm.valid"
             >
