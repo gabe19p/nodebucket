@@ -66,7 +66,7 @@ const options = {
       version: "1.0.0",
     },
   },
-  apis: ["./routes/*.js"], // files containing swagger
+  apis: ["./server/routes/*.js"], // files containing swagger
 };
 
 const openapiSpecification = swaggerJSdoc(options);

@@ -28,7 +28,7 @@ const Employee = require("../models/employee");
  *         required: true
  *         description: Employees ID
  *         schema:
- *           type: Number
+ *           type: number
  *     responses:
  *       '200':
  *         description: Employee document
