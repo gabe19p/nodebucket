@@ -63,4 +63,89 @@ router.get("/:empId", async (req, res) => {
   }
 });
 
+/**
+ * findAllTasks
+ */
+router.get("/:empId/tasks", async (req, res) => {
+  try {
+    Employee.findOne(
+      {
+        empId: req.params.empId,
+      },
+      "empId todo done",
+      function (err, emp) {
+        // mongodb error when finding emp
+        if (err) {
+          console.log(err);
+          res.status(501).send({
+            err: config.mongoServerError + ": " + err.message,
+          });
+        } // return the found emp json item
+        else {
+          console.log(emp);
+          res.json(emp);
+        }
+      }
+    );
+  } catch (error) {
+    // catching the server error
+    console.log(error);
+    res.status(500).send({ err: config.serverError + ": " + e.message });
+  }
+});
+
+/**
+ * createTask
+ */
+router.post("/:empId/tasks", async (req, res) => {
+  try {
+    Employee.findOne({ empId: req.params.empId }, function (err, emp) {
+      if (err) {
+        console.log(err);
+        res.status(501).send({
+          err: config.mongoServerError + ": " + err.message,
+        });
+      } // return the found emp json item
+      else {
+        // test f/ !null value
+        if (emp) {
+          console.log(emp);
+
+          const newTask = {
+            text: req.body.text,
+          };
+
+          // push the new task to the todo array
+          emp.todo.push(newTask);
+
+          // save the new emp object
+          emp.save(function (err, updatedEmp) {
+            if (err) {
+              console.log(err);
+              res.status(501).send({
+                err: config.mongoServerError + ": " + err.message,
+              });
+            } else {
+              console.log(updatedEmp);
+              res.json(updatedEmp);
+            }
+          });
+        } // if emp is null > handle
+        else {
+          res.status(401).send({
+            err:
+              "Employee ID: " +
+              req.params.empId +
+              " does not belong to a registered user.",
+          });
+        }
+      }
+    });
+  } catch (error) {
+    // catching the server error
+    console.log(error);
+    res.status(500).send({ err: config.serverError + ": " + e.message });
+  }
+});
+
 module.exports = router;
