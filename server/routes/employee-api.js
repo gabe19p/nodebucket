@@ -65,8 +65,32 @@ router.get("/:empId", async (req, res) => {
 
 /**
  * findAllTasks
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *   get:
+ *     tags:
+ *       - Employees
+ *     description: API for returning all of an employees tasks
+ *     summary: return employee tasks
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         description: Employee ID
+ *         schema:
+ *           type: number
+ *     responses:
+ *       '200':
+ *         description: Employee document
+ *       '401':
+ *         description: Invalid employeeId
+ *       '500':
+ *         description: Server exception
+ *       '501':
+ *         description: MongoDB exception
  */
 router.get("/:empId/tasks", async (req, res) => {
+  // find the employee based on params employee ID
   try {
     Employee.findOne(
       {
@@ -74,7 +98,7 @@ router.get("/:empId/tasks", async (req, res) => {
       },
       "empId todo done",
       function (err, emp) {
-        // mongodb error when finding emp
+        // mongodb error when finding emp in callback
         if (err) {
           console.log(err);
           res.status(501).send({
@@ -96,41 +120,79 @@ router.get("/:empId/tasks", async (req, res) => {
 
 /**
  * createTask
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *   post:
+ *     tags:
+ *       - Employees
+ *     description: API for creating a new task
+ *     summary: push task to the todo array
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         description: employee id
+ *         schema:
+ *           type: number
+ *     requestBody:
+ *        description:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              required:
+ *                - text
+ *              properties:
+ *                text:
+ *                  type: string
+ *     responses:
+ *       '200':
+ *         description: Employee document
+ *       '401':
+ *         description: Invalid employeeId
+ *       '500':
+ *         description: Server exception
+ *       '501':
+ *         description: MongoDB exception
  */
 router.post("/:empId/tasks", async (req, res) => {
+  // find employee with params id
   try {
     Employee.findOne({ empId: req.params.empId }, function (err, emp) {
+      // throw an error if mongodb issue
       if (err) {
         console.log(err);
         res.status(501).send({
           err: config.mongoServerError + ": " + err.message,
         });
-      } // return the found emp json item
+      }
+      // if no error, proceed with found employee
       else {
-        // test f/ !null value
+        // if employee is found, add task
         if (emp) {
           console.log(emp);
-
+          // task variable based on the parameters text
           const newTask = {
             text: req.body.text,
           };
-
           // push the new task to the todo array
           emp.todo.push(newTask);
-
-          // save the new emp object
+          // save the new emp object with task
           emp.save(function (err, updatedEmp) {
+            // if there is an issue saving, handle error
             if (err) {
               console.log(err);
               res.status(501).send({
                 err: config.mongoServerError + ": " + err.message,
               });
-            } else {
+            }
+            // if no issue saving, update employee todo array and console object
+            else {
               console.log(updatedEmp);
               res.json(updatedEmp);
             }
           });
-        } // if emp is null > handle
+        }
+        // if emp is null / employee doesn't exist, handle error
         else {
           res.status(401).send({
             err:
