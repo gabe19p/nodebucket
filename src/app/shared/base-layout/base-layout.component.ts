@@ -1,3 +1,11 @@
+/**
+ * Title:  base-layout.component.ts
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: angular layout f/
+ *   nav bar and footer
+ */
+
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";

@@ -1,3 +1,11 @@
+/**
+ * Title:  employee.service.ts
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: http service for
+ *   employee API calls
+ */
+
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";

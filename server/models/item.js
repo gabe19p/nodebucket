@@ -1,5 +1,8 @@
 /**
- *
+ * Title:  item.js
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: item schema
  */
 
 const mongoose = require("mongoose");

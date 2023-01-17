@@ -1,5 +1,8 @@
 /**
- *
+ * Title:  employee.js
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: employee model
  */
 
 const mongoose = require("mongoose");

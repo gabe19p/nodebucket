@@ -1,3 +1,10 @@
+/**
+ * Title:  app.module.ts
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: angular main module
+ */
+
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 

@@ -1,4 +1,11 @@
 /**
+ * Title:  index.js
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: node server
+ */
+
+/**
  * Require statements
  */
 const express = require("express");
@@ -45,16 +52,6 @@ mongoose.connection.on("disconnected", () => {
   console.log("Server disconnect from the host (MongoDB Atlas).");
 });
 
-// old mongoose connection prior to error handling
-// mongoose
-//   .connect(CONN)
-//   .then(() => {
-//     console.log("Connection to the database was successful");
-//   })
-//   .catch((err) => {
-//     console.log("MongoDB Error: " + err.message);
-//   });
-
 /**
  * Swagger Setup
  */
@@ -68,7 +65,6 @@ const options = {
   },
   apis: ["./server/routes/*.js"], // files containing swagger
 };
-
 const openapiSpecification = swaggerJSdoc(options);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(openapiSpecification));
 

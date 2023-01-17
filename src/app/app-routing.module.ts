@@ -1,3 +1,10 @@
+/**
+ * Title:  app-routing.module.ts
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: angular routing
+ */
+
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { BaseLayoutComponent } from "./shared/base-layout/base-layout.component";

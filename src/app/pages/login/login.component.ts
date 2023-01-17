@@ -1,3 +1,10 @@
+/**
+ * Title:  login.component.ts
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: angular login page
+ */
+
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";

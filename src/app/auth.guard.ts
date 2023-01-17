@@ -1,3 +1,11 @@
+/**
+ * Title:  auth.guard.ts
+ * Author: Danial Purselley
+ * Date: 17 Jan 23
+ * Description: angular guard f/
+ *  checking user authentication
+ */
+
 import { Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
