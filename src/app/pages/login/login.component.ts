@@ -22,6 +22,8 @@ import { EmployeeService } from "../../shared/services/employee.service";
 export class LoginComponent implements OnInit {
   // empty prime ng error
   errorMessages: Message[] = [];
+
+  // employee model
   employee: Employee;
 
   // form builder to add validation to empid field
@@ -44,27 +46,48 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Login function
+   */
   login() {
+    /**
+     * Assign variable to form control name 'empId' (login.component.html line 19)
+     */
     const empId = this.loginForm.controls["empId"].value;
 
+    /**
+     * Call the findEmployeeById API, via employee.service, with formControl empId
+     */
     this.employeeService.findEmployeeById(empId).subscribe({
       next: (res) => {
         if (res) {
-          // employee variable we created
+          console.log("this is the response from login");
+          console.log(res);
+          /**
+           * Set employee variable to the response data
+           */
           this.employee = res;
-          // add user to the cookies session
+          /**
+           * Add user to the cookies session
+           */
           this.cookieService.set(
             "session_user",
             this.employee.empId.toString(), // have to convert to string since empId is a number
             1
           );
           this.cookieService.set(
-            "session_user",
+            "session_name",
             `${this.employee.firstName} ${this.employee.lastName}`,
             1
           );
+          /**
+           * Route the user to the homepage after login
+           */
           this.router.navigate(["/"]);
         } else {
+          /**
+           * Error message if invalid ID
+           */
           this.errorMessages = [
             {
               severity: "error",

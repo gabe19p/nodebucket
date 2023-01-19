@@ -1,11 +1,14 @@
 <div fxLayout="'column">
-  <mat-card class="login-container">
-    <mat-card-title class="center"> Employee Sign-In Page </mat-card-title>
-    <mat-card-subtitle class="center">
-      You must enter a valid employee ID to continue
-    </mat-card-subtitle>
+  <mat-card class="login-container" style="padding: 0">
+    <div class="primary" style="padding: 5px; color: white">
+      <br />
+      <mat-card-title class="center"> Employee Sign-In Page </mat-card-title>
+      <mat-card-subtitle class="center" style="color: white">
+        You must enter a valid employee ID to continue
+      </mat-card-subtitle>
+    </div>
 
-    <mat-card-content>
+    <mat-card-content class="p-10">
       <p-messages [(value)]="errorMessages" [enableService]="false">
       </p-messages>
 

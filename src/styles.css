@@ -13,3 +13,23 @@ body {
   text-align: center;
   width: 100%;
 }
+
+.primary {
+  background-color: #2196f3;
+}
+
+.primary-dark {
+  background-color: #0d47a1;
+}
+
+.accent {
+  background-color: #ffc107;
+}
+
+.accent-dark {
+  background-color: #ff6f00;
+}
+
+.p-10 {
+  padding: 10px;
+}

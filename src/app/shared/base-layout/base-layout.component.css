@@ -1,7 +1,7 @@
 .logo {
   margin-left: 75px;
   font-size: 24px;
-  font-weight: lighter;;
+  font-weight: lighter;
 }
 
 .navbar-container {
@@ -13,13 +13,13 @@
   font-weight: lighter;
 }
 
-.main-content {
+/* .main-content {
   padding-left: 30px;
-}
+} */
 
 .footer {
   bottom: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
 }
 
@@ -36,4 +36,8 @@
 
 .bu-link:hover {
   text-decoration: underline;
+}
+
+/* try to fill nav bar with this class */
+.filler {
 }

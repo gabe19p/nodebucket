@@ -30,6 +30,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ContactComponent } from './pages/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     AuthLayoutComponent,
     BaseLayoutComponent,
     LoginComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
