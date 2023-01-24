@@ -206,6 +206,201 @@ router.post("/:empId/tasks", async (req, res) => {
   } catch (error) {
     // catching the server error
     console.log(error);
+    res.status(500).send({ err: config.serverError + ": " + error.message });
+  }
+});
+
+/**
+ * updateTasks
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *   put:
+ *     tags:
+ *       - Employees
+ *     description: API for updating a task
+ *     summary: update tasks from employee
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         description: employee id
+ *         schema:
+ *           type: number
+ *     requestBody:
+ *        description:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              properties:
+ *                todo:
+ *                  type: array
+ *                  items:
+ *                    type: object
+ *                    properties:
+ *                      text:
+ *                        type: string
+ *                done:
+ *                  type: array
+ *                  items:
+ *                    type: object
+ *                    properties:
+ *                      text:
+ *                        type: string
+ *     responses:
+ *       '200':
+ *         description: Updated Employee document
+ *       '401':
+ *         description: Invalid employeeId
+ *       '500':
+ *         description: Server exception
+ *       '501':
+ *         description: MongoDB exception
+ */
+router.put("/:empId/tasks", async (req, res) => {
+  try {
+    Employee.findOne({ empId: req.params.empId }, function (err, emp) {
+      // if there is an error within MongoDB
+      if (err) {
+        console.log(err);
+        res.status(501).send({
+          err: "MongoDB server error: " + err.message,
+        });
+      }
+      // found employee
+      else {
+        if (emp) {
+          console.log(emp);
+
+          // setting the body data to fields
+          emp.set({
+            todo: req.body.todo,
+            done: req.body.done,
+          });
+
+          // save the updatedEmp
+          emp.save(function (err, updatedEmp) {
+            if (err) {
+              console.log(err);
+              res.status(501).send({
+                err: "MongoDB server error: " + err.message,
+              });
+            } else {
+              console.log(updatedEmp);
+              res.json(updatedEmp);
+            }
+          });
+        }
+        // if emp is null / employee doesn't exist, handle error
+        else {
+          res.status(401).send({
+            err:
+              "Employee ID: " +
+              req.params.empId +
+              " does not belong to a registered user.",
+          });
+        }
+      }
+    });
+  } catch (e) {
+    // catching the server error
+    console.log(e);
+    res.status(500).send({ err: config.serverError + ": " + e.message });
+  }
+});
+
+/**
+ * deleteTask
+ *
+ */
+router.delete('/"empId/tasks/:taskId', async (req, res) => {
+  try {
+    Employee.findOne({ empId: req.params.empId }, function (err, emp) {
+      /**
+       * callback error, handling mongoDB search
+       */
+      if (err) {
+        console.log(err);
+        res.status(501).send({
+          err: "MongoDB server error: " + err.message,
+        });
+      } else {
+        /**
+         * if statement to see if employee exists within the DB
+         */
+        if (emp) {
+          /**
+           * task variables from the request
+           */
+          const taskId = req.params.taskId;
+          const todoItem = emp.todo.find(
+            (item) => item._id.toString() === taskId
+          );
+          const doneItem = emp.done.find(
+            (item) => item._id.toString() === taskId
+          );
+          /**
+           * updated the todo array
+           */
+          if (todoItem) {
+            /**
+             * remove the array item from DB
+             */
+            emp.todo.id(todoItem._id).remove();
+            /**
+             * save the removal w/ callback
+             */
+            emp.save(function (err, updatedTodoItem) {
+              if (err) {
+                console.log(err);
+                res.status(501).send({
+                  err: "MongoDB server error: " + err.message,
+                });
+              } else {
+                console.log(updatedTodoItem); // API SUCCESS!
+                res.json(updatedTodoItem);
+              }
+            }); // end emp.save
+          } else if (doneItem) {
+            /**
+             * update the done array
+             */
+            emp.done.id(doneItem._id).remove();
+            /**
+             * save the removal w/ callback
+             */
+            emp.save(function (err, updatedDoneItem) {
+              if (err) {
+                console.log(err);
+                res.status(501).send({
+                  err: "MongoDB server error: " + err.message,
+                });
+              } else {
+                console.log(updatedDoneItem); // API SUCCESS!
+                res.json(updatedDoneItem);
+              }
+            }); // end emp.save
+          } else {
+            console.log("Invalid taskId: " + taskId);
+            res.status(401).send({
+              err: "Invalid taskId: " + taskId,
+            });
+          }
+        } else {
+          /**
+           * handle error if employee doesn't exist in DB
+           */
+          res.status(401).send({
+            err:
+              "Employee ID: " +
+              req.params.empId +
+              " does not belong to a registered user.",
+          });
+        }
+      } //  end else of callback
+    }); // end findOne
+  } catch (e) {
+    // catching the server error
+    console.log(e);
     res.status(500).send({ err: config.serverError + ": " + e.message });
   }
 });
