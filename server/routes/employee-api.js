@@ -310,9 +310,37 @@ router.put("/:empId/tasks", async (req, res) => {
 
 /**
  * deleteTask
- *
+ * @openapi
+ * /api/employees/{empId}/tasks/{taskId}:
+ *   delete:
+ *     tags:
+ *       - Employees
+ *     description: API for deleting a task
+ *     summary: delete employee task
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         description: employee id
+ *         schema:
+ *           type: number
+ *       - name: taskId
+ *         in: path
+ *         required: true
+ *         description: task id
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Task deleted
+ *       '401':
+ *         description: Invalid employee Id
+ *       '500':
+ *         description: Server exception
+ *       '501':
+ *         description: MongoDB exception
  */
-router.delete('/"empId/tasks/:taskId', async (req, res) => {
+router.delete("/:empId/tasks/:taskId", async (req, res) => {
   try {
     Employee.findOne({ empId: req.params.empId }, function (err, emp) {
       /**

@@ -9,6 +9,7 @@
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Item } from "../models/item.interface";
 
 @Injectable({
   providedIn: "root",
@@ -28,5 +29,15 @@ export class TaskService {
     return this.http.post("/api/employees/" + empId + "/tasks", {
       text: task,
     });
+  }
+
+  // call update api when we move out tasks
+  updateTask(empId: number, todo: Item[], done: Item[]): Observable<any> {
+    return this.http.put("/api/employees/" + empId + "/tasks", { todo, done });
+  }
+
+  // call delete api when we delete tasks
+  deleteTask(empId: number, taskId: string): Observable<any> {
+    return this.http.delete("/api/employees/" + empId + "/tasks/" + taskId);
   }
 }

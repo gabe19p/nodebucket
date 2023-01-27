@@ -30,7 +30,12 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ContactComponent } from './pages/contact/contact.component';
+import { ContactComponent } from "./pages/contact/contact.component";
+import { AboutComponent } from "./pages/about/about.component";
+import { NotFoundComponent } from "./pages/not-found/not-found.component";
+import { ConfirmDialogComponent } from "./shared/confirm-dialog/confirm-dialog.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -40,6 +45,9 @@ import { ContactComponent } from './pages/contact/contact.component';
     BaseLayoutComponent,
     LoginComponent,
     ContactComponent,
+    AboutComponent,
+    NotFoundComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +67,8 @@ import { ContactComponent } from './pages/contact/contact.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

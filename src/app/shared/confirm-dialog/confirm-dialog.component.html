@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{ dialogData.header }}</h2>
+<div mat-dialog-content>
+  <p>{{ dialogData.content }}</p>
+  <small style="color: red">WARNING: This action cannot be undone.</small>
+</div>
+
+<mat-divider></mat-divider>
+
+<div mat-dialog-actions align="end">
+  <!-- cancel dialog button -->
+  <button mat-raised-button matDialogClose="cancel" color="accent">
+    Cancel
+  </button>
+  <!-- confirm dialog button === delete the task -->
+  <button
+    mat-raised-button
+    matDialogClose="confirm"
+    color="warn"
+    cdkFocusInitial
+  >
+    Confirm
+  </button>
+</div>
