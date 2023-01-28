@@ -8,13 +8,15 @@
         <button class="logo" routerLink="/" mat-button>nodebucket</button>
 
         <!-- <button class="navbar-link" routerLink="/" mat-button>Home</button> -->
-        <button class="navbar-link" mat-button>About</button>
+        <button class="navbar-link" mat-button routerLink="/about">
+          about
+        </button>
         <button class="navbar-link" mat-button routerLink="/contact">
-          Contact
+          contact
         </button>
         <span class="filler"></span>
         <button class="navbar-link" mat-button (click)="logout()">
-          Log out
+          log out
         </button>
       </div>
     </mat-toolbar>

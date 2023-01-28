@@ -1,0 +1,22 @@
+.wrapper {
+  width: 50%;
+  margin: auto;
+  position: relative;
+  padding: 10px 5px;
+}
+
+.container {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.large-text {
+  font-size: 62px;
+}
+
+.medium-text {
+  font-size: 48px;
+}
