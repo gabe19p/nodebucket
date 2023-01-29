@@ -20,3 +20,9 @@
 .medium-text {
   font-size: 48px;
 }
+
+h1,
+h2,
+mat-icon {
+  text-shadow: 1px 3px 10px rgb(20, 20, 20);
+}
